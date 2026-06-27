@@ -6,6 +6,8 @@ import AdminDashboard from './pages/AdminDashboard'
 import LecturerDashboard from './pages/LecturerDashboard'
 import StudentDashboard from './pages/StudentDashboard'
 import SuperAdminDashboard from './pages/SuperAdminDashboard'
+import Landing from './pages/Landing'
+
 
 export default function App() {
   const [session, setSession] = useState(null)
@@ -39,7 +41,17 @@ export default function App() {
   }
 
   if (loading) return <p style={{ padding: 20 }}>Loading...</p>
-  if (!session) return <Login />
+  if (!session) {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route path="/" element={<Landing />} />
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
+    </BrowserRouter>
+  )
+}
   if (!profile) return <p style={{ padding: 20 }}>Loading profile...</p>
 
   const home =
