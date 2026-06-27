@@ -1,0 +1,22 @@
+:root { --green: #226e3c; --ink: #222; --line: #dcdfe3; }
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  color: var(--ink);
+  background: #f6f7f9;
+}
+main { max-width: 1000px; margin: 0 auto; }
+button {
+  background: var(--green); color: #fff; border: none;
+  border-radius: 6px; padding: 7px 14px; cursor: pointer; font-size: 14px;
+}
+button:hover { opacity: .92; }
+button:disabled { opacity: .5; cursor: default; }
+header button { background: #fff; color: var(--green); }
+nav button { background: #fff; color: var(--ink); border: 1px solid var(--line); text-align: left; }
+nav button:hover { background: #eef1f3; }
+input, select { padding: 7px 9px; border: 1px solid var(--line); border-radius: 6px; font-size: 14px; background: #fff; }
+table { border-collapse: collapse; background: #fff; }
+th, td { border: 1px solid var(--line); padding: 8px 10px; text-align: left; }
+th { background: #f0f2f4; }
