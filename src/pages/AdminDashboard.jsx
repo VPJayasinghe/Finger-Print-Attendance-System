@@ -1,52 +1,79 @@
 import { useState } from 'react'
-import DashboardLayout from '../components/DashboardLayout'
+
+import Shell from '../components/Shell'
+
 import Faculties from './admin/Faculties'
-import Modules from './admin/Modules'
 import Batches from './admin/Batches'
-import Halls from './admin/Halls'
 import Cohorts from './admin/Cohorts'
-import Students from './admin/Students'
+import Halls from './admin/Halls'
+import Modules from './admin/Modules'
 import Lecturers from './admin/Lecturers'
+import Students from './admin/Students'
 import Sessions from './admin/Sessions'
 import Devices from './admin/Devices'
 import Attendance from './admin/Attendance'
 import Analytics from './admin/Analytics'
 
-
-const SECTIONS = [
-  'Faculties', 'Batches', 'Cohorts', 'Modules', 'Halls',
-  'Students', 'Lecturers', 'Sessions', 'Devices', 'Attendance', 'Analytics'
+const GROUPS = [
+  {
+    label: 'Foundation setup',
+    items: [
+      'Faculties',
+      'Batches',
+      'Cohorts',
+      'Halls',
+    ],
+  },
+  {
+    label: 'Academic flow',
+    items: [
+      'Modules',
+      'Lecturers',
+      'Students',
+      'Sessions',
+      'Devices',
+    ],
+  },
+  {
+    label: 'Operations',
+    items: [
+      'Attendance',
+      'Analytics',
+    ],
+  },
 ]
 
-const VIEWS = {
-  Faculties: <Faculties />,
-  Batches: <Batches />,
-  Cohorts: <Cohorts />,
-  Modules: <Modules />,
-  Halls: <Halls />,
-  Students: <Students />,
-  Lecturers: <Lecturers />,
-  Devices: <Devices />,
-  Attendance: <Attendance />,
-  Analytics: <Analytics />,
-  Sessions: <Sessions />
-}
-
-export default function AdminDashboard({ profile }) {
+export default function AdminDashboard() {
   const [section, setSection] = useState('Faculties')
+
+  const VIEWS = {
+    Faculties: <Faculties />,
+    Batches: <Batches />,
+    Cohorts: <Cohorts />,
+    Halls: <Halls />,
+    Modules: <Modules />,
+    Lecturers: <Lecturers />,
+    Students: <Students />,
+    Sessions: <Sessions />,
+    Devices: <Devices />,
+    Attendance: <Attendance />,
+    Analytics: <Analytics />,
+  }
+
   return (
-    <DashboardLayout name={profile.full_name} role={profile.role}>
-      <div style={{ display: 'flex', gap: 20 }}>
-        <nav style={{ display: 'flex', flexDirection: 'column', gap: 6, minWidth: 140 }}>
-          {SECTIONS.map(s => (
-            <button key={s} onClick={() => setSection(s)}>{s}</button>
-          ))}
-        </nav>
-        <div style={{ flex: 1 }}>
-          <h2>{section}</h2>
-          {VIEWS[section] || <p>Coming soon.</p>}
-        </div>
+    <Shell
+      groups={GROUPS}
+      active={section}
+      onSelect={setSection}
+      eyebrow="Admin workspace"
+      title={section}
+      subtitle="Manage your attendance system"
+    >
+      <div className="screen">
+        {VIEWS[section] || (
+          <p>{section}: coming soon.</p>
+        )}
       </div>
-    </DashboardLayout>
+    </Shell>
   )
 }
