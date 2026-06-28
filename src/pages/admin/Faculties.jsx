@@ -27,22 +27,26 @@ export default function Faculties() {
   return (
     <div>
       {error && <p style={{ color: 'red' }}>{error}</p>}
-      <div style={{ display: 'flex', gap: 8, marginBottom: 12 }}>
-        <input placeholder="Faculty name" value={name} onChange={e => setName(e.target.value)} />
-        <button onClick={add}>Add</button>
+      <div className="card">
+        <div style={{ display: 'flex', gap: 8, marginBottom: 12 }}>
+          <input placeholder="Faculty name" value={name} onChange={e => setName(e.target.value)} />
+          <button onClick={add}>Add</button>
+        </div>
       </div>
-      <table>
-        <thead><tr><th>ID</th><th>Name</th><th></th></tr></thead>
-        <tbody>
-          {rows.map(r => (
-            <tr key={r.faculty_id}>
-              <td>{r.faculty_id}</td>
-              <td>{r.faculty_name}</td>
-              <td><button onClick={() => remove(r.faculty_id)}>Delete</button></td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <div className="card">
+        <table>
+          <thead><tr><th>ID</th><th>Name</th><th></th></tr></thead>
+          <tbody>
+            {rows.map(r => (
+              <tr key={r.faculty_id}>
+                <td>{r.faculty_id}</td>
+                <td>{r.faculty_name}</td>
+                <td><button onClick={() => remove(r.faculty_id)}>Delete</button></td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   )
 }
