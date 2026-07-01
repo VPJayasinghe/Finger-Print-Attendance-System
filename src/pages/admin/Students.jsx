@@ -5,7 +5,6 @@ export default function Students() {
   const [rows, setRows] = useState([])
   const [cohorts, setCohorts] = useState([])
   const [error, setError] = useState('')
-  const [search, setSearch] = useState('')
 
   // add-form fields
   const [studentId, setStudentId] = useState('')
@@ -129,15 +128,6 @@ export default function Students() {
     load()
   }
 
-  const visibleRows = rows.filter((row) => {
-    const q = search.trim().toLowerCase()
-    if (!q) return true
-    return (
-      row.student_id.toLowerCase().includes(q) ||
-      row.full_name.toLowerCase().includes(q)
-    )
-  })
-
   return (
     <div>
       {error && <p style={{ color: 'red' }}>{error}</p>}
@@ -157,15 +147,6 @@ export default function Students() {
         </select>
         <button onClick={add}>Add</button>
       </div>
-      
-      <div style={{ marginBottom: 12 }}>
-        <input
-          placeholder="Search by ID or name…"
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-          style={{ width: 280 }}
-        />
-      </div>
 
       <table>
         <thead>
@@ -178,7 +159,7 @@ export default function Students() {
           </tr>
         </thead>
         <tbody>
-          {visibleRows.map((row) => (
+          {rows.map((row) => (
             <StudentRow
               key={row.student_id}
               row={row}
